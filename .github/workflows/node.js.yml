@@ -10,6 +10,28 @@
           branches: ["main", "dev"]
 
   jobs:
+      mongo_init:
+          name: Mongo Setup
+          runs-on: ubuntu-latest
+          defaults:
+              run:
+                  working-directory: ./quirknotes/backend
+          steps:
+              - run: mongod --dbpath=./data/db
+      server_init:
+          name: Server Setup
+          runs-on: ubuntu-latest
+          defaults:
+              run:
+                  working-directory: ./quirknotes/backend
+          strategy:
+              matrix:
+                  node-version: [20.x]
+          steps:
+              - uses: actions/checkout@v3
+              - name: Use Node.js ${{ matrix.node-version }}
+              - run: npm run dev
+          
       build:
           name: Backend test
           runs-on: ubuntu-latest
