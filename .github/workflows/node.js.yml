@@ -29,12 +29,10 @@
               matrix:
                   node-version: [20.x]
           steps:
-              - name: Use Node.js ${{ matrix.node-version }}
-              - run: npm run dev
               - uses: actions/checkout@v3
                 with:
                   node-version: ${{ matrix.node-version }}
-          
+              - run: npm run dev
       build:
           name: Backend test
           runs-on: ubuntu-latest
