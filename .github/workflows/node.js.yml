@@ -16,6 +16,9 @@
           defaults:
               run:
                   working-directory: ./quirknotes/backend
+          strategy:
+              matrix:
+                  mongodb-version: ['latest']
           steps:
               - uses: actions/checkout@v3
               - run: mongod --dbpath=./data/db
@@ -29,10 +32,12 @@
               matrix:
                   node-version: [20.x]
           steps:
+              - name: Use Node.js ${{ matrix.node-version }}
+              - run: npm run dev
               - uses: actions/checkout@v3
                 with:
                   node-version: ${{ matrix.node-version }}
-              - run: npm run dev
+          
       build:
           name: Backend test
           runs-on: ubuntu-latest
