@@ -30,20 +30,5 @@
                 with:
                   mongodb-version: ${{ matrix.mongodb-version }}
               - run: npm i
-              - run: npm run dev
-      server_test:
-          name: Server Test
-          runs-on: ubuntu-latest
-          defaults:
-              run:
-                  working-directory: ./quirknotes/backend
-          strategy:
-              matrix:
-                  node-version: [20.x]
-          steps:
-              - name: Use Node.js ${{ matrix.node-version }}
-                uses: actions/checkout@v3
-                with:
-                  node-version: ${{ matrix.node-version }}
-              - run: npm i
+              - run: npm run build
               - run: npm test
