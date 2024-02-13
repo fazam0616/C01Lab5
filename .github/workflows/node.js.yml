@@ -11,7 +11,7 @@
 
   jobs:
       server_init:
-          name: Server Setup
+          name: Backend test
           runs-on: ubuntu-latest
           defaults:
               run:
